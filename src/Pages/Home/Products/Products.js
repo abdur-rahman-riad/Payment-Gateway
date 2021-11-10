@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import SingleProduct from '../SingleProduct/SingleProduct';
 
 const Products = () => {
@@ -26,6 +27,12 @@ const Products = () => {
                             product={product}
                         ></SingleProduct>)
                     }
+                </div>
+
+                <div className="mt-5 text-center">
+                    <Link to="/exploreproducts">
+                        <button className="btn btn-primary">View All Products</button>
+                    </Link>
                 </div>
             </Container>
         </>

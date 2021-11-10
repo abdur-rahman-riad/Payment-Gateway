@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import SingleProduct from '../SingleProduct/SingleProduct';
 import Header from '../../Shared/Header/Header';
+import Footer from '../../Shared/Footer/Footer';
+import { Link } from 'react-router-dom';
 
 const ExploreProducts = () => {
 
@@ -25,7 +27,14 @@ const ExploreProducts = () => {
                         ></SingleProduct>)
                     }
                 </div>
+
+                <div className="text-center mt-5">
+                    <Link to="/">
+                        <button className="btn btn-primary ">Back to the Home</button>
+                    </Link>
+                </div>
             </Container>
+            <Footer></Footer>
         </>
     );
 };

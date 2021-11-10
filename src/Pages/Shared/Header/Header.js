@@ -11,7 +11,7 @@ const Header = () => {
         <>
             <Navbar className="shadow-sm" sticky="top" bg="light" variant="light" collapseOnSelect expand="lg">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand as={Link} to="/">
                         <img src={logo}
                             width="120"
                             height="60"
@@ -22,8 +22,8 @@ const Header = () => {
 
                     <Navbar.Collapse className="justify-content-end">
 
-                        <Nav.Link className="fw-bold text-dark" as={Link} to="/login">Dashboard</Nav.Link>
-                        <Nav.Link className="fw-bold text-dark" as={Link} to="/login">Logout</Nav.Link>
+                        <Nav.Link className="fw-bold text-dark" as={Link} to="/dashboard">Dashboard</Nav.Link>
+                        <Nav.Link className="fw-bold text-dark" as={Link} to="/login">Login</Nav.Link>
 
                         <Navbar.Text className="ms-3 d-flex mt-2">
                             <img src={avatar}
