@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, useParams, useRouteMatch, Link } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -7,18 +7,29 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import AddProduct from '../AddProduct/AddProduct'
+import ManageOrders from '../ManageOrders/ManageOrders';
+import DashboardHome from '../DashboardHome/DashboardHome'
 import NotFound from '../../NotFound/NotFound';
-import Products from '../../Home/Products/Products';
+import MyOrders from '../MyOrders/MyOrders';
+import ManageProduct from '../ManageProduct/ManageProduct';
+import MakeReview from '../MakeReview/MakeReview';
+import Pay from '../Pay/Pay';
 
-const drawerWidth = 240;
+const drawerWidth = 275;
 
 function Dashboard(props) {
     const { window } = props;
@@ -31,13 +42,43 @@ function Dashboard(props) {
     };
 
     const drawer = (
-        <div>
+        <div className="mt-4">
             <Toolbar />
-            <Divider />
 
-            <Link to={`${url}/notfound`} className="text-danger" style={{ listStyle: "none" }}>
-                <button className="btn mt-3">Back to the Home</button>
-            </Link>
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/makeadmin`}><AdminPanelSettingsIcon /><span className="ms-2 fw-bold">Make Admin</span></Link>
+            </ListItem>
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/addproduct`}><AddCircleIcon /><span className="ms-2 fw-bold">Add Product</span></Link>
+            </ListItem>
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/manageorders`}><NoteAltIcon /><span className="ms-2 fw-bold">Manage Orders</span></Link>
+            </ListItem>
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/myorders`}><ShoppingCartIcon /><span className="ms-2 fw-bold">My Orders</span></Link>
+            </ListItem>
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/manageproduct`}><ListAltIcon /><span className="ms-2 fw-bold">Manage Products</span></Link>
+            </ListItem>
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/makereview`}><ReviewsIcon /><span className="ms-2 fw-bold">Make Review</span></Link>
+            </ListItem>
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to={`${url}/pay`}><LocalAtmIcon /><span className="ms-2 fw-bold">Pay</span></Link>
+            </ListItem>
+
+            <Divider className="my-3" />
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-danger"><MeetingRoomIcon /> <span className="ms-2 fw-bold">Logout</span> </Link>
+            </ListItem>
+
 
         </div>
     );
@@ -48,11 +89,13 @@ function Dashboard(props) {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar
+                style={{ backgroundColor: "teal", color: "white" }}
                 position="fixed"
-                sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
-                }}
+                // sx={{
+                //     width: { sm: `calc(100% - ${drawerWidth}px)` },
+                //     ml: { sm: `${drawerWidth}px` },
+                // }}
+                sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
             >
                 <Toolbar>
                     <IconButton
@@ -64,11 +107,12 @@ function Dashboard(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Dashboard
+                    <Typography variant="h6" component="div">
+                        Welcome to Your Dashboard
                     </Typography>
                 </Toolbar>
             </AppBar>
+
             <Box
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -108,7 +152,39 @@ function Dashboard(props) {
                 <Toolbar />
 
                 <Switch>
-                    <Route path={`${path}/notfound`}>
+                    <Route exact path={path}>
+                        <DashboardHome />
+                    </Route>
+
+                    <Route path={`${path}/makeadmin`}>
+                        <MakeAdmin />
+                    </Route>
+
+                    <Route path={`${path}/addproduct`}>
+                        <AddProduct />
+                    </Route>
+
+                    <Route path={`${path}/manageorders`}>
+                        <ManageOrders />
+                    </Route>
+
+                    <Route path={`${path}/myorders`}>
+                        <MyOrders />
+                    </Route>
+
+                    <Route path={`${path}/manageproduct`}>
+                        <ManageProduct />
+                    </Route>
+
+                    <Route path={`${path}/makereview`}>
+                        <MakeReview />
+                    </Route>
+
+                    <Route path={`${path}/pay`}>
+                        <Pay />
+                    </Route>
+
+                    <Route path={`${path}/*`}>
                         <NotFound />
                     </Route>
                 </Switch>
