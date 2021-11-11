@@ -7,7 +7,7 @@ const NotFound = () => {
     return (
         <>
             <Container className="text-center my-5 py-5">
-                <img src={Error} className="mt-3 pt-3" alt="" />
+                <img src={Error} width="250px" className="mt-3 pt-3 img-fluid" alt="" />
                 <h1 className="fw-bold text-danger">404 Page Not Found</h1>
                 <Link to="/">
                     <button className="btn btn-secondary mt-3">Back to the Home</button>

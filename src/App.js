@@ -1,38 +1,52 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+import AuthProvider from './context/AuthProvider';
+import Booking from './Pages/Booking/Booking/Booking';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import ExploreProducts from './Pages/Home/ExploreProducts/ExploreProducts';
 import Home from './Pages/Home/Home/Home';
+import Login from './Pages/Login/Login/Login';
+import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
     <div>
-      <Router>
-        <Switch>
+      <AuthProvider>
+        <Router>
+          <Switch>
 
-          <Route exact path="/">
-            <Home />
-          </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
 
-          <Route path="/home">
-            <Home />
-          </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
 
-          <Route path="/exploreproducts">
-            <ExploreProducts></ExploreProducts>
-          </Route>
+            <Route path="/exploreproducts">
+              <ExploreProducts />
+            </Route>
 
-          <Route path="/dashboard">
-            <Dashboard></Dashboard>
-          </Route>
+            <PrivateRoute path="/booking/:id">
+              <Booking />
+            </PrivateRoute>
 
-          <Route path="*">
-            <NotFound />
-          </Route>
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
 
-        </Switch>
-      </Router>
+            <Route path="/login">
+              <Login />
+            </Route>
+
+            <Route path="*">
+              <NotFound />
+            </Route>
+
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
