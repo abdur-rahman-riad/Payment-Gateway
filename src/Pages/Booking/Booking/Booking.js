@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import Footer from '../../Shared/Footer/Footer';
 import Header from '../../Shared/Header/Header';
+import { useForm } from "react-hook-form";
+import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const Booking = () => {
+    const { user } = useAuth();
     const { id } = useParams();
     const [bookingInfo, setBookingInfo] = useState([]);
+    const { register, handleSubmit, reset } = useForm();
 
     useEffect(() => {
         fetch("/products.json")
@@ -16,18 +20,113 @@ const Booking = () => {
 
     const bookingProduct = bookingInfo.find(product => product.key === id);
 
+    const onSubmit = data => {
+        const key = bookingProduct?.key;
+        const status = "Pending...";
+        data.status = status;
+        data.key = key;
+        console.log(data);
+        reset();
+    };
+
 
     return (
         <>
             <Header></Header>
-            <div className="text-center my-3">
-                <h2>Purchase ID: {id}</h2>
-                <h1>{bookingProduct?.name}</h1>
-                <img src={bookingProduct?.img} width="450px" alt="" />
-                <br />
-                <Link to="/exploreproducts">
-                    <button className="btn btn-primary mt-5 ">Back to the Home</button>
-                </Link>
+            <div className="container my-3">
+                <div className="row g-5 py-4">
+                    <div className="col-md-6">
+
+
+                        <img src={bookingProduct?.img} className="img-fluid img-thumbnail" width="100%" alt="Package Banner" />
+                        {/* <p>ParamsID: {id} ----- ProductID: {bookingProduct?.key}</p> */}
+                        <h3 className="fw-bold mt-1">{bookingProduct?.name}</h3>
+
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-danger d-inline text-white">{bookingProduct?.car_type.toUpperCase()}</p>
+
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-success d-inline text-white">56000 KM</p>
+
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-primary d-inline text-white">CONTENT</p>
+
+                        <p className="text-secondary my-1">{bookingProduct?.description}</p>
+                        <h3 className="fw-bold text-secondary">{bookingProduct?.price} tk</h3>
+                    </div>
+
+
+                    <div className="col-md-6">
+                        <form onSubmit={handleSubmit(onSubmit)}>
+
+
+                            <div className="form-floating mb-2">
+                                <input
+                                    {...register("userName")}
+                                    defaultValue={user?.displayName}
+                                    type="text"
+                                    className="form-control"
+                                    id="userName"
+                                    placeholder="Name"
+                                    readOnly />
+                                <label htmlFor="userName">Name</label>
+                            </div>
+
+                            <div className="form-floating mb-2">
+                                <input
+                                    {...register("userEmail")}
+                                    defaultValue={user?.email}
+                                    type="email"
+                                    className="form-control"
+                                    id="userEmail"
+                                    placeholder="Email"
+                                    readOnly />
+                                <label htmlFor="userEmail">Email</label>
+                            </div>
+
+                            {bookingProduct?.name &&
+                                <div className="form-floating mb-2">
+                                    <input
+                                        {...register("productName")}
+                                        defaultValue={bookingProduct?.name}
+                                        type="text"
+                                        className="form-control"
+                                        id="productName"
+                                        placeholder="Product Name"
+                                        readOnly />
+                                    <label htmlFor="productName">Product Name</label>
+                                </div>
+                            }
+
+                            <div className="form-floating mb-2">
+                                <input
+                                    {...register("address")}
+                                    type="text"
+                                    className="form-control"
+                                    id="address"
+                                    placeholder="Address"
+                                    required />
+                                <label htmlFor="address">Address</label>
+                            </div>
+
+                            <div className="form-floating mb-2">
+                                <input
+                                    {...register("phoneNumber")}
+                                    type="number"
+                                    className="form-control"
+                                    id="phoneNumber"
+                                    placeholder="Phone Number"
+                                    required />
+                                <label htmlFor="phoneNumber">Phone Number</label>
+                            </div>
+
+                            <input className="btn btn-dark w-100" type="submit" value="Confirm Purchase" />
+                        </form>
+                    </div>
+                </div>
+
+                <div className="text-center mt-5">
+                    <Link to="/exploreproducts">
+                        <button className="btn btn-secondary">Explore Other Products</button>
+                    </Link>
+                </div>
             </div>
             <Footer></Footer>
         </>

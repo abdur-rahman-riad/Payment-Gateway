@@ -28,10 +28,14 @@ import MyOrders from '../MyOrders/MyOrders';
 import ManageProduct from '../ManageProduct/ManageProduct';
 import MakeReview from '../MakeReview/MakeReview';
 import Pay from '../Pay/Pay';
+import Home from '../../Home/Home/Home';
+import useAuth from '../../../hooks/useAuth';
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 275;
 
 function Dashboard(props) {
+    const { logOut } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -44,6 +48,10 @@ function Dashboard(props) {
     const drawer = (
         <div className="mt-4">
             <Toolbar />
+
+            <ListItem button>
+                <Link className="list-group-item w-100 text-secondary" to="/"><HomeIcon /><span className="ms-2 fw-bold">Home</span></Link>
+            </ListItem>
 
             <ListItem button>
                 <Link className="list-group-item w-100 text-secondary" to={`${url}/makeadmin`}><AdminPanelSettingsIcon /><span className="ms-2 fw-bold">Make Admin</span></Link>
@@ -75,8 +83,9 @@ function Dashboard(props) {
 
             <Divider className="my-3" />
 
-            <ListItem button>
-                <Link className="list-group-item w-100 text-danger"><MeetingRoomIcon /> <span className="ms-2 fw-bold">Logout</span> </Link>
+            <ListItem button onClick={logOut} className="border w-50 mx-auto text-danger">
+                <MeetingRoomIcon />
+                <span className="ms-2 fw-bold">Logout</span>
             </ListItem>
 
 
@@ -154,6 +163,10 @@ function Dashboard(props) {
                 <Switch>
                     <Route exact path={path}>
                         <DashboardHome />
+                    </Route>
+
+                    <Route exact path="/">
+                        <Home />
                     </Route>
 
                     <Route path={`${path}/makeadmin`}>
