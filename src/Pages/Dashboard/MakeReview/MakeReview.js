@@ -16,7 +16,11 @@ const MakeReview = () => {
             <h3 className="fst-italic fw-bold text-success">Make a Review</h3>
 
             <div className="row g-3 align-items-center">
-                <div className="col-md-6">
+                <div className="col-md-2">
+                    <img src={review} className="img-fluid" width="100%" alt="" />
+                </div>
+
+                <div className="col-md-8">
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <div class="form-floating mb-2">
@@ -71,8 +75,8 @@ const MakeReview = () => {
                     </form>
                 </div>
 
-                <div className="col-md-6">
-                    <img src={review} className="img-fluid" width="80%" alt="" />
+                <div className="col-md-2">
+                    <img src={review} className="img-fluid" width="100%" alt="" />
                 </div>
             </div>
         </div>

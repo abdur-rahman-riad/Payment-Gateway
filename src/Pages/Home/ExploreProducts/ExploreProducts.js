@@ -9,7 +9,7 @@ const ExploreProducts = () => {
 
     const [exploreProducts, setExploreProducts] = useState([]);
     useEffect(() => {
-        fetch("/products.json")
+        fetch("http://localhost:5000/products")
             .then(response => response.json())
             .then(data => setExploreProducts(data))
     }, []);
@@ -22,7 +22,7 @@ const ExploreProducts = () => {
                 <div className="row g-3">
                     {
                         exploreProducts.map(product => <SingleProduct
-                            key={product.key}
+                            key={product._id}
                             product={product}
                         ></SingleProduct>)
                     }

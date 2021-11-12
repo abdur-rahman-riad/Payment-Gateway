@@ -5,6 +5,7 @@ import Header from '../../Shared/Header/Header';
 import { useForm } from "react-hook-form";
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Booking = () => {
     const { user } = useAuth();
@@ -13,20 +14,29 @@ const Booking = () => {
     const { register, handleSubmit, reset } = useForm();
 
     useEffect(() => {
-        fetch("/products.json")
+        fetch("http://localhost:5000/products")
             .then(response => response.json())
             .then(data => setBookingInfo(data))
     }, []);
 
-    const bookingProduct = bookingInfo.find(product => product.key === id);
+    const bookingProduct = bookingInfo.find(product => product._id === id);
 
     const onSubmit = data => {
-        const key = bookingProduct?.key;
+        const key = bookingProduct?._id;
         const status = "Pending...";
+        const img = bookingProduct?.img;
         data.status = status;
         data.key = key;
-        console.log(data);
-        reset();
+        data.img = img;
+        // console.log(data);
+        axios.post("http://localhost:5000/orders", data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    alert("Order Confirmed Successfully");
+                    // RESET FORM
+                    reset();
+                }
+            })
     };
 
 
@@ -38,15 +48,14 @@ const Booking = () => {
                     <div className="col-md-6">
 
 
-                        <img src={bookingProduct?.img} className="img-fluid img-thumbnail" width="100%" alt="Package Banner" />
-                        {/* <p>ParamsID: {id} ----- ProductID: {bookingProduct?.key}</p> */}
+                        <img src={bookingProduct?.img} className="img-fluid img-thumbnail" width="100%" alt="Not Found Product Banner" />
                         <h3 className="fw-bold mt-1">{bookingProduct?.name}</h3>
 
-                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-danger d-inline text-white">{bookingProduct?.car_type.toUpperCase()}</p>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-danger d-inline text-white">{bookingProduct?.carCondition.toUpperCase()}</p>
 
-                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-success d-inline text-white">56000 KM</p>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-success d-inline text-white">{bookingProduct?.mileage.toUpperCase()} KMPH</p>
 
-                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-primary d-inline text-white">CONTENT</p>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-primary d-inline text-white">{bookingProduct?.fuelType.toUpperCase()}</p>
 
                         <p className="text-secondary my-1">{bookingProduct?.description}</p>
                         <h3 className="fw-bold text-secondary">{bookingProduct?.price} tk</h3>
@@ -117,7 +126,7 @@ const Booking = () => {
                                 <label htmlFor="phoneNumber">Phone Number</label>
                             </div>
 
-                            <input className="btn btn-dark w-100" type="submit" value="Confirm Purchase" />
+                            <input className="btn btn-dark w-100" type="submit" value="Confirm Order" />
                         </form>
                     </div>
                 </div>

@@ -9,20 +9,22 @@ const SingleProduct = (props) => {
         <>
             <div className="col-md-4">
                 <div className="card h-100 package-card">
-                    <img src={img} alt="Loading Tour Package Banner" />
+                    <img src={img} style={{ height: "230px" }} alt="Not Found Product Banner" />
                     <div className="card-body">
-                        <p>{carCondition}</p>
-                        <p>{fuelType}</p>
-                        <p>{mileage}</p>
-                        <h5 className="card-title fw-bold">{name}</h5>
-                        <p className="card-text">{description}</p>
-                        <h5 className="fw-bold">$ {price}</h5>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold mt-0 me-2 bg-danger d-inline text-white">{carCondition.toUpperCase()}</p>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-success d-inline text-white">{mileage.toUpperCase()} KMPH</p>
+
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-primary d-inline text-white">{fuelType.toUpperCase()}</p>
+
+                        <h5 className="card-title my-2 fw-bold">{name}</h5>
+                        <p className="card-text text-secondary" style={{ textAlign: "justify" }}>{description}</p>
                     </div>
 
                     <div>
-                        <div className="card-footer">
+                        <div className="card-footer d-flex align-items-center justify-content-between">
+                            <h3 className="fw-bold text-dark">{price} tk</h3>
                             <Link to={`/booking/${_id}`}>
-                                <button className="btn btn-dark w-100">Buy Now</button>
+                                <button className="btn btn-dark">Order Now</button>
                             </Link>
                         </div>
                     </div>
