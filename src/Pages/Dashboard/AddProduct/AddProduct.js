@@ -1,11 +1,20 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 const AddProduct = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
         console.log(data);
-        reset();
+        axios.post("http://localhost:5000/products", data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    alert("New Product Successfully Added");
+
+                    // RESET FORM
+                    reset();
+                }
+            })
     };
 
 
