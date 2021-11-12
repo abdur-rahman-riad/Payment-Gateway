@@ -2,13 +2,23 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import useAuth from '../../../hooks/useAuth';
 import review2 from '../../../images/review2.png';
+import axios from 'axios';
 
 const MakeReview = () => {
     const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
+
     const onSubmit = data => {
         console.log(data);
-        reset();
+        axios.post("http://localhost:5000/reviews", data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    alert("Your Review Successfully Posted");
+
+                    // RESET FORM
+                    reset();
+                }
+            })
     };
 
     return (
@@ -49,21 +59,20 @@ const MakeReview = () => {
                                 type="number"
                                 class="form-control"
                                 id="rating"
+                                step="any"
                                 placeholder="Rating Out of 5"
                                 required />
                             <label for="rating">Rating Out of 5</label>
                         </div>
 
-                        <div class="form-floating mb-2">
+                        <div class="mb-2">
                             <textarea
                                 {...register("review")}
                                 type="text"
-                                id="review"
                                 className="form-control"
                                 placeholder="Write Your Valuable Review"
                                 rows="3"
                                 required />
-                            <label for="rating">Write Your Valuable Review</label>
                         </div>
 
                         <input className="btn btn-dark w-100" type="submit" value="Post Review" />

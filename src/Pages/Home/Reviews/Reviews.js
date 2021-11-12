@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import SingleReview from '../SingleReview/SingleReview';
 
 const Reviews = () => {
+    const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/reviews")
+            .then(response => response.json())
+            .then(data => setReviews(data))
+    }, []);
+
     return (
-        <div>
-            <h2>All Reviews</h2>
+        <div className="container">
+            <h3 className="text-center fw-bold text-success fst-italic my-3 py-2">What Our Customers Say</h3>
+            <div className="row g-3">
+                {
+                    reviews.map(review => <SingleReview
+                        key={review._id}
+                        review={review}
+                    />)
+                }
+            </div>
         </div>
     );
 };
