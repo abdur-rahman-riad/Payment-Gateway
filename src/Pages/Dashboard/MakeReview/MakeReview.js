@@ -10,7 +10,7 @@ const MakeReview = () => {
 
     const onSubmit = data => {
         console.log(data);
-        axios.post("http://localhost:5000/reviews", data)
+        axios.post("https://whispering-everglades-34016.herokuapp.com/reviews", data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert("Your Review Successfully Posted");

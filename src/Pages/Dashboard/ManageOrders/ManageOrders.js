@@ -4,7 +4,7 @@ import OrderItem from '../OrderItem/OrderItem';
 const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/orders')
+        fetch('https://whispering-everglades-34016.herokuapp.com/orders')
             .then(response => response.json())
             .then(data => setOrders(data))
     }, [orders]);

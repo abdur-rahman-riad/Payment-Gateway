@@ -26,8 +26,6 @@ const Header = () => {
 
                         <Nav.Link className="fw-bold text-success" as={Link} to="/">Home</Nav.Link>
 
-                        <Nav.Link className="fw-bold text-success" as={Link} to="/about">About</Nav.Link>
-
                         {user?.email ?
                             <>
                                 <Nav.Link className="fw-bold text-success" as={Link} to="/dashboard">Dashboard</Nav.Link>
@@ -38,7 +36,7 @@ const Header = () => {
                                     <img src={avatar}
                                         width="28"
                                         height="28" alt="" />
-                                    <h6 className="mt-1 ms-2">{user?.displayName}</h6>
+                                    <h6 className="mt-1 ms-2">{user?.displayName ? user?.displayName : user?.email}</h6>
                                 </Navbar.Text></>
                             :
                             <Nav.Link className="fw-bold text-success" as={Link} to="/login">Login</Nav.Link>

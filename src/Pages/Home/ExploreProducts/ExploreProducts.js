@@ -9,7 +9,7 @@ const ExploreProducts = () => {
 
     const [exploreProducts, setExploreProducts] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/products")
+        fetch("https://whispering-everglades-34016.herokuapp.com/products")
             .then(response => response.json())
             .then(data => setExploreProducts(data))
     }, []);

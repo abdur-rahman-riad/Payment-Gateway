@@ -7,7 +7,7 @@ const ProductItem = (props) => {
     const handleDeleteProduct = id => {
         const proceed = window.confirm("Are you sure, you want to delete this Product?");
         if (proceed) {
-            const url = `http://localhost:5000/products/${id}`;
+            const url = `https://whispering-everglades-34016.herokuapp.com/products/${id}`;
             fetch(url, {
                 method: "DELETE"
             })

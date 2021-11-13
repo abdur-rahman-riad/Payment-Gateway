@@ -5,7 +5,7 @@ const MyOrderItem = (props) => {
     const { _id, key, productName, status } = props.orders;
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://whispering-everglades-34016.herokuapp.com/products')
             .then(response => response.json())
             .then(data => setMyProductList(data));
     }, []);
@@ -16,7 +16,7 @@ const MyOrderItem = (props) => {
     const deleteMyBooking = id => {
         const proceed = window.confirm("Are you sure, you want to delete this Order?");
         if (proceed) {
-            const url = `http://localhost:5000/orders/${id}`;
+            const url = `https://whispering-everglades-34016.herokuapp.com/orders/${id}`;
             fetch(url, {
                 method: "DELETE"
             })

@@ -7,6 +7,7 @@ import ExploreProducts from './Pages/Home/ExploreProducts/ExploreProducts';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login/Login';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
+import Register from './Pages/Login/Register/Register';
 import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
@@ -38,6 +39,10 @@ function App() {
 
             <Route path="/login">
               <Login />
+            </Route>
+
+            <Route path="/register">
+              <Register />
             </Route>
 
             <Route path="*">

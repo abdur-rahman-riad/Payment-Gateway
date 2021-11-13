@@ -8,7 +8,7 @@ const MyOrders = () => {
     const email = user.email;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${email}`)
+        fetch(`https://whispering-everglades-34016.herokuapp.com/orders/${email}`)
             .then(res => res.json())
             .then(data => setMyOrders(data))
     }, [myOrders]);

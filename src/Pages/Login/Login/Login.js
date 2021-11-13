@@ -7,11 +7,12 @@ import { Divider } from '@mui/material';
 import LoginVector from '../../../images/login.jpg';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
 
-    const { googleSignIn, setUser, setIsLoading } = useAuth();
+    const { googleSignIn, setUser, setIsLoading, loginUser, error } = useAuth();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location?.state?.from || '/home';
@@ -25,6 +26,8 @@ const Login = () => {
             }).finally(() => setIsLoading(false));
     }
 
+
+
     // On Change For Email and Password
     const handleOnChange = event => {
         const field = event.target.name;
@@ -37,8 +40,11 @@ const Login = () => {
 
     // Login With Email and Password
     const handleLoginSubmit = event => {
-
         event.preventDefault();
+        history.push(redirect_uri);
+        loginUser(loginData.email, loginData.password);
+        document.getElementById('emailId').value = "";
+        document.getElementById('passId').value = "";
     }
 
     return (
@@ -54,11 +60,12 @@ const Login = () => {
                             <div className="mb-3">
                                 <TextField
                                     fullWidth
+                                    id="emailId"
                                     type="email"
                                     name="email"
                                     label="Email"
                                     variant="outlined"
-                                    onChange={handleOnChange}
+                                    onBlur={handleOnChange}
                                     required
                                 />
                             </div>
@@ -66,14 +73,16 @@ const Login = () => {
                             <div className="mb-3">
                                 <TextField
                                     fullWidth
+                                    id="passId"
                                     type="password"
                                     name="password"
                                     label="Password"
                                     variant="outlined"
-                                    onChange={handleOnChange}
+                                    onBlur={handleOnChange}
                                     required
                                 />
                             </div>
+                            <p className="text-center text-secondary">{error}</p>
 
                             <div>
                                 <Button
@@ -81,11 +90,12 @@ const Login = () => {
                                     fullWidth
                                     variant="contained"
                                 >login</Button>
-
-                                <Button
-                                    className="my-2"
-                                    variant="text"
-                                >Newbie? Register here</Button>
+                                <Link to="/register">
+                                    <Button
+                                        className="my-2"
+                                        variant="text"
+                                    >Newbie? Register here</Button>
+                                </Link>
                             </div>
 
                         </form>

@@ -14,7 +14,7 @@ const Booking = () => {
     const { register, handleSubmit, reset } = useForm();
 
     useEffect(() => {
-        fetch("http://localhost:5000/products")
+        fetch("https://whispering-everglades-34016.herokuapp.com/products")
             .then(response => response.json())
             .then(data => setBookingInfo(data))
     }, []);
@@ -29,7 +29,7 @@ const Booking = () => {
         data.key = key;
         data.img = img;
         // console.log(data);
-        axios.post("http://localhost:5000/orders", data)
+        axios.post("https://whispering-everglades-34016.herokuapp.com/orders", data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert("Order Confirmed Successfully");
