@@ -35,7 +35,7 @@ import HomeIcon from '@mui/icons-material/Home';
 const drawerWidth = 275;
 
 function Dashboard(props) {
-    const { logOut } = useAuth();
+    const { logOut, admin } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -50,19 +50,7 @@ function Dashboard(props) {
             <Toolbar />
 
             <ListItem button>
-                <Link className="list-group-item w-100 text-secondary" to="/"><HomeIcon /><span className="ms-2 fw-bold">Home</span></Link>
-            </ListItem>
-
-            <ListItem button>
-                <Link className="list-group-item w-100 text-secondary" to={`${url}/makeadmin`}><AdminPanelSettingsIcon /><span className="ms-2 fw-bold">Make Admin</span></Link>
-            </ListItem>
-
-            <ListItem button>
-                <Link className="list-group-item w-100 text-secondary" to={`${url}/addproduct`}><AddCircleIcon /><span className="ms-2 fw-bold">Add Product</span></Link>
-            </ListItem>
-
-            <ListItem button>
-                <Link className="list-group-item w-100 text-secondary" to={`${url}/manageorders`}><NoteAltIcon /><span className="ms-2 fw-bold">Manage Orders</span></Link>
+                <Link className="list-group-item w-100 text-success" to="/"><HomeIcon /><span className="ms-2 fw-bold">Home</span></Link>
             </ListItem>
 
             <ListItem button>
@@ -70,12 +58,27 @@ function Dashboard(props) {
             </ListItem>
 
             <ListItem button>
-                <Link className="list-group-item w-100 text-secondary" to={`${url}/manageproduct`}><ListAltIcon /><span className="ms-2 fw-bold">Manage Products</span></Link>
-            </ListItem>
-
-            <ListItem button>
                 <Link className="list-group-item w-100 text-secondary" to={`${url}/makereview`}><ReviewsIcon /><span className="ms-2 fw-bold">Make Review</span></Link>
             </ListItem>
+
+            {admin && <>
+                <ListItem button>
+                    <Link className="list-group-item w-100 text-secondary" to={`${url}/makeadmin`}><AdminPanelSettingsIcon /><span className="ms-2 fw-bold">Make Admin</span></Link>
+                </ListItem>
+
+                <ListItem button>
+                    <Link className="list-group-item w-100 text-secondary" to={`${url}/addproduct`}><AddCircleIcon /><span className="ms-2 fw-bold">Add Product</span></Link>
+                </ListItem>
+
+                <ListItem button>
+                    <Link className="list-group-item w-100 text-secondary" to={`${url}/manageorders`}><NoteAltIcon /><span className="ms-2 fw-bold">Manage Orders</span></Link>
+                </ListItem>
+
+                <ListItem button>
+                    <Link className="list-group-item w-100 text-secondary" to={`${url}/manageproduct`}><ListAltIcon /><span className="ms-2 fw-bold">Manage Products</span></Link>
+                </ListItem>
+            </>}
+
 
             <ListItem button>
                 <Link className="list-group-item w-100 text-secondary" to={`${url}/pay`}><LocalAtmIcon /><span className="ms-2 fw-bold">Pay</span></Link>

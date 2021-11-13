@@ -8,6 +8,7 @@ const useFirebase = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const auth = getAuth();
+    const [admin, setAdmin] = useState(false);
 
     // Create User
     const registerUser = (email, password, name) => {
@@ -17,7 +18,8 @@ const useFirebase = () => {
                 const user = result.user;
                 const newUser = { email, displayName: name };
                 setUser(newUser);
-
+                // Save User
+                saveUser(email, name);
 
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -71,6 +73,13 @@ const useFirebase = () => {
         return () => unsubcribed;
     }, []);
 
+    // Admin
+    useEffect(() => {
+        fetch(`https://whispering-everglades-34016.herokuapp.com/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
+
     // Logout
     const logOut = () => {
         setIsLoading(true);
@@ -79,10 +88,24 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false))
     }
 
+    // Save User Into Database
+    const saveUser = (email, displayName) => {
+        const user = { email, displayName };
+        fetch("https://whispering-everglades-34016.herokuapp.com/users", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    }
+
 
 
     return {
         user,
+        admin,
         setUser,
         googleSignIn,
         logOut,
