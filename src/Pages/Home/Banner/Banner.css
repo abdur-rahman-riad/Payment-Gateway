@@ -1,0 +1,6 @@
+.bannerImg{
+    transition: transform 3s ease-in-out;
+}
+.bannerImg:hover{
+    transform: rotate(360deg);
+}

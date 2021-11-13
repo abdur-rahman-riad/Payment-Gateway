@@ -11,7 +11,7 @@ const Reviews = () => {
 
     return (
         <div className="container">
-            <h3 className="text-center fw-bold text-success fst-italic my-3 py-2">What Our Customers Say</h3>
+            <h3 className="text-center fw-bold fst-italic mt-5 py-2">What Our <span className="text-danger">Customers Say</span> !</h3>
             <div className="row g-3">
                 {
                     reviews.map(review => <SingleReview

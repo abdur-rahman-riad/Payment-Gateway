@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
+import SpeedIcon from '@mui/icons-material/Speed';
 
 const Booking = () => {
     const { user } = useAuth();
@@ -53,9 +55,9 @@ const Booking = () => {
 
                         <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-danger d-inline text-white">{bookingProduct?.carCondition.toUpperCase()}</p>
 
-                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-success d-inline text-white">{bookingProduct?.mileage.toUpperCase()} KMPH</p>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-success d-inline text-white"><SpeedIcon style={{ fontSize: "20px", marginBottom: "3px", marginLeft: "-4px" }} />{bookingProduct?.mileage.toUpperCase()} Km</p>
 
-                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-primary d-inline text-white">{bookingProduct?.fuelType.toUpperCase()}</p>
+                        <p style={{ padding: "2px 5px", borderRadius: "3px", fontSize: "13px" }} className="fw-bold me-2 bg-primary d-inline text-white"><LocalGasStationIcon style={{ fontSize: "20px", marginBottom: "3px", marginLeft: "-4px" }} />{bookingProduct?.fuelType.toUpperCase()}</p>
 
                         <p className="text-secondary my-1">{bookingProduct?.description}</p>
                         <h3 className="fw-bold text-secondary">{bookingProduct?.price} tk</h3>

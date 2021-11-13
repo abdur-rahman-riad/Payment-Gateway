@@ -19,7 +19,8 @@ const Products = () => {
 
         <>
             <Container className="my-3 py-3">
-                <h3 className="text-center fw-bold text-success fst-italic">Our All Products</h3>
+                <h3 className="text-center fw-bold fst-italic">Our All <span className="text-danger">Car Deals</span></h3>
+                <p style={{ fontSize: "13px", marginTop: "-5px" }} className=" mb-4 text-center text-success fw-bold fst-italic">Build your deal to fit your needs</p>
                 <div className="row g-3">
                     {
                         homeProducts.map(product => <SingleProduct
@@ -29,7 +30,7 @@ const Products = () => {
                     }
                 </div>
 
-                <div className="mt-5 text-center">
+                <div className="mt-3 mb-4 text-center">
                     <Link to="/exploreproducts">
                         <button className="btn btn-primary">View All Products</button>
                     </Link>
