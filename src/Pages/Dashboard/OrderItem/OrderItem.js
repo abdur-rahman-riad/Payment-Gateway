@@ -21,6 +21,10 @@ const OrderItem = (props) => {
         }
     }
 
+    const handleApprove = id => {
+        alert("Order Approved.");
+    }
+
     return (
         <>
             <tr>
@@ -35,7 +39,7 @@ const OrderItem = (props) => {
                 <td>
                     <button onClick={() => handleDeleteOrder(_id)} style={{ fontSize: "15px", padding: "3px 5px", border: "none", backgroundColor: "crimson", color: "white", borderRadius: "3px", marginRight: "3px" }}>Delete</button>
 
-                    <button style={{ fontSize: "15px", padding: "3px 5px", border: "none", backgroundColor: "teal", color: "white", borderRadius: "3px", marginRight: "3px" }}>Approve</button>
+                    <button onClick={() => handleApprove(_id)} style={{ fontSize: "15px", padding: "3px 5px", border: "none", backgroundColor: "teal", color: "white", borderRadius: "3px", marginRight: "3px" }}>Approve</button>
                 </td>
             </tr>
         </>

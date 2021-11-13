@@ -8,7 +8,7 @@ const SingleReview = (props) => {
 
     return (
         <div className="col-md-4">
-            <div className="px-3 py-4 text-center rounded" style={{ boxShadow: "1px 1px 3px gray" }}>
+            <div className="px-3 py-4 text-center rounded h-100" style={{ boxShadow: "1px 1px 3px gray" }}>
                 <img src={Quotes} width="25px" alt="" />
                 <p className="fst-italic">{review}</p>
                 <Rating name="read-only" value={rating} precision={0.5} readOnly />
